@@ -1,0 +1,202 @@
+@prefix : <http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/> .
+@prefix ex: <http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix p1: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dbp: <http://dbpedia.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/> .
+
+<http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/> rdf:type owl:Ontology ;
+                                                                          owl:imports dbp: .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/abstract
+ex:abstract rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/artistOf
+ex:artistOf rdf:type owl:ObjectProperty ;
+            owl:equivalentProperty foaf:maker ;
+            rdfs:domain ex:Artist ;
+            rdfs:range ex:Song .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/associatedWith
+ex:associatedWith rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/basedIn
+ex:basedIn rdf:type owl:ObjectProperty ,
+                    owl:AsymmetricProperty .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/containsSong
+ex:containsSong rdf:type owl:ObjectProperty ,
+                         owl:AsymmetricProperty .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/memberOf
+ex:memberOf rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/playedBy
+ex:playedBy rdf:type owl:ObjectProperty ;
+            owl:inverseOf ex:playsInstrument ;
+            rdfs:domain ex:Instrument ;
+            rdfs:range ex:Person .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/playsInstrument
+ex:playsInstrument rdf:type owl:ObjectProperty ;
+                   rdfs:domain ex:Person ;
+                   rdfs:range ex:Instrument .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/subGenreOf
+ex:subGenreOf rdf:type owl:ObjectProperty ,
+                       owl:TransitiveProperty .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/wroteAlbum
+ex:wroteAlbum rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf ex:artistOf .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/wroteSong
+ex:wroteSong rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf ex:artistOf .
+
+
+###  http://xmlns.com/foaf/0.1/maker
+foaf:maker rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://dbpedia.org/property/Home
+<http://dbpedia.org/property/Home> rdf:type owl:Class ;
+                                   rdfs:subClassOf ex:Country .
+
+
+###  http://purl.org/ontology/mo/MusicArtist
+mo:MusicArtist rdf:type owl:Class ;
+               owl:equivalentClass ex:Artist .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Album
+ex:Album rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Restriction ;
+                               owl:onProperty ex:containsSong ;
+                               owl:someValuesFrom ex:Song
+                             ] .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Artist
+ex:Artist rdf:type owl:Class ;
+          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                owl:onProperty ex:associatedWith ;
+                                owl:someValuesFrom ex:Record_Label
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty ex:basedIn ;
+                                owl:someValuesFrom ex:Country
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty ex:memberOf ;
+                                owl:someValuesFrom ex:Band
+                              ] .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Band
+ex:Band rdf:type owl:Class ;
+        owl:disjointWith ex:Solo_Artist .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Bassist
+ex:Bassist rdf:type owl:Class ;
+           rdfs:subClassOf ex:Person .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Country
+ex:Country rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Drummer
+ex:Drummer rdf:type owl:Class ;
+           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                 owl:onProperty ex:playsInstrument ;
+                                 owl:someValuesFrom ex:Drums
+                               ] ;
+           rdfs:subClassOf ex:Person .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Drums
+ex:Drums rdf:type owl:Class ;
+         rdfs:subClassOf ex:Instrument .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Genre
+ex:Genre rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Restriction ;
+                               owl:onProperty ex:subGenreOf ;
+                               owl:someValuesFrom ex:Genre
+                             ] .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Guitar
+ex:Guitar rdf:type owl:Class ;
+          rdfs:subClassOf ex:Instrument .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Guitarist
+ex:Guitarist rdf:type owl:Class ;
+             rdfs:subClassOf ex:Person .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Instrument
+ex:Instrument rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Person
+ex:Person rdf:type owl:Class ;
+          owl:equivalentClass foaf:Person .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Pianist
+ex:Pianist rdf:type owl:Class ;
+           rdfs:subClassOf ex:Person .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Record_Label
+ex:Record_Label rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Singer
+ex:Singer rdf:type owl:Class ;
+          rdfs:subClassOf ex:Person .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Solo_Artist
+ex:Solo_Artist rdf:type owl:Class ;
+               rdfs:subClassOf ex:Person .
+
+
+###  http://www.semanticweb.org/tim/ontologies/2019/9/untitled-ontology-32/Song
+ex:Song rdf:type owl:Class .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+foaf:Person rdf:type owl:Class .
+
+
+###  Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi
