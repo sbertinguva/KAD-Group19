@@ -1,0 +1,87 @@
+<html>
+  <head>
+      <title>Knowledge and Data Project</title>
+ 	<link href="kadproject.css" rel="stylesheet">
+  
+   
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="sgvizler.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+
+    
+      </head>
+<body>
+<script type="text/javascript"></script>
+<div class="timeline">
+  <div class="container left">
+
+    <div class="content">
+      <button type="button" class="collapsible">
+        Blues
+      </button>
+    <div class="content">
+      <p id="Blues"></p>
+      <a class="a" id="blues" href="Blues.html">More Information</a>
+    </div>
+    
+    </div>
+  </div>  
+
+  <div class="container right">
+      <div class="content">
+        <button type="button" class="collapsible">
+          Jazz
+        </button>
+      <div class="content">
+        <p id="Jazz"></p>
+        <a class="a" href="Jazz.html" >More Information</a>
+      </div>
+      </div>
+    </div>  
+
+  <div class="container left">
+    <div class="content">
+      <button type="button" class="collapsible">
+        Rock
+      </button>
+    <div class="content">
+      <p id="Rock_music" ></p>
+      <a class="a" href="Rock.html">More Information</a>
+    </div>
+    </div>
+  </div>  
+
+  <div class="container right">
+      <div class="content">
+        <button type="button" class="collapsible">
+          Metal
+        </button>
+      <div class="content">
+        <p id="Heavy_metal_music" ></p>
+        <a class="a" href="Metal.html">More Information</a>
+      </div>
+      </div>
+    </div>  
+</div>
+
+
+</body>
+</head>
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+  
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+  </script>
